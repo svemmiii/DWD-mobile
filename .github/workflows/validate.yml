@@ -1,0 +1,50 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hassfest:
+    name: Hassfest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: home-assistant/actions/hassfest@master
+
+  hacs:
+    name: HACS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: hacs/action@main
+        with:
+          category: integration
+
+  unit-tests:
+    name: Unit tests (${{ matrix.profile.name }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        profile:
+          - name: HA 2026.6.0 minimum
+            requirements: requirements_test_ha_2026_6.txt
+          - name: HA 2026.9.1 current
+            requirements: requirements_test.txt
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+      - name: Install test dependencies
+        run: python -m pip install -r "${{ matrix.profile.requirements }}"
+      - name: Compile integration
+        run: python -m compileall -q custom_components/dwd_mobile
+      - name: Run tests
+        run: pytest -q

@@ -1,0 +1,227 @@
+{
+  "title": "DWD Mobile",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Standortquelle auswählen",
+        "description": "DWD Mobile sucht für diesen Standort automatisch die nächstgelegene DWD-Wetterstation. Beim Stationswechsel bleiben alle Entity-IDs unverändert.",
+        "data": {
+          "location_mode": "Standortquelle"
+        }
+      },
+      "entity": {
+        "title": "Standort-Entität auswählen",
+        "description": "Wähle eine Entität mit Latitude/Longitude, zum Beispiel device_tracker, Person oder Zone.",
+        "data": {
+          "location_entity": "Standort-Entität"
+        }
+      },
+      "fixed": {
+        "title": "Festen Standort setzen",
+        "data": {
+          "fixed_location": "Standort"
+        }
+      },
+      "settings": {
+        "title": "DWD-Einstellungen",
+        "description": "Der stündliche DWD-Datensatz kann große Downloads verursachen. Der normale Modus wird empfohlen.",
+        "data": {
+          "data_type": "Quelle für aktuelle Werte",
+          "interpolate": "Aktuelle Vorhersagewerte interpolieren",
+          "hourly_update": "Stündlichen DWD-Vorhersagedatensatz verwenden",
+          "enable_radar": "Radar-Niederschlagssensoren aktivieren",
+          "enable_airquality": "DWD-Luftqualitätssensoren bereitstellen",
+          "additional_forecast_attributes": "Erweiterte Vorhersagewerte berechnen",
+          "sensor_forecast_steps": "Stündliche Vorhersageschritte in Sensorattributen",
+          "wind_direction_type": "Darstellung Windrichtung",
+          "daily_temp_high_precision": "Tagestemperaturen mit 0,1 °C Genauigkeit",
+          "station_hysteresis_km": "Hysterese beim Stationswechsel (km)",
+          "max_station_distance_km": "Maximale Entfernung zur nächsten MOSMIX-Station (km)",
+          "last_known_location_max_age_min": "Maximales Alter der letzten gültigen Position (Minuten)"
+        },
+        "data_description": {
+          "enable_airquality": "NO₂, Ozon, PM2.5 und PM10 bleiben als Entities vorhanden, solange der DWD-Endpunkt nicht verfügbar ist. Kommt der Endpunkt zurück, werden dieselben Entities automatisch befüllt.",
+          "station_hysteresis_km": "0 bedeutet immer die tatsächlich nächstgelegene Station. Ein höherer Wert verhindert häufiges Umschalten direkt an Stationsgrenzen.",
+          "max_station_distance_km": "Sicherheitsgrenze für sehr abgelegene Positionen oder auf See. MOSMIX-Stationen gibt es weltweit. 0 deaktiviert die Entfernungsgrenze.",
+          "last_known_location_max_age_min": "Bei einem GPS-/Entitätsausfall wird die letzte gültige Position höchstens so lange weiterverwendet. 0 deaktiviert den Ablauf. Standard: 60 Minuten."
+        }
+      }
+    },
+    "error": {
+      "entity_not_found": "Entität nicht gefunden",
+      "no_coordinates": "Die ausgewählte Entität liefert keine nutzbaren Koordinaten",
+      "fixed_location_required": "Für den Modus „Fester Standort“ muss ein Standort gesetzt werden"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "DWD-Mobile-Optionen",
+        "description": "Änderungen werden nach dem automatischen Neuladen der Integration übernommen.",
+        "data": {
+          "location_mode": "Standortquelle",
+          "location_entity": "Standort-Entität (nur Entitätsmodus)",
+          "fixed_location": "Fester Standort (nur fester Modus)",
+          "data_type": "Quelle für aktuelle Werte",
+          "interpolate": "Aktuelle Vorhersagewerte interpolieren",
+          "hourly_update": "Stündlichen DWD-Vorhersagedatensatz verwenden",
+          "enable_radar": "Radar-Niederschlagssensoren aktivieren",
+          "enable_airquality": "DWD-Luftqualitätssensoren bereitstellen",
+          "additional_forecast_attributes": "Erweiterte Vorhersagewerte berechnen",
+          "sensor_forecast_steps": "Stündliche Vorhersageschritte in Sensorattributen",
+          "wind_direction_type": "Darstellung Windrichtung",
+          "daily_temp_high_precision": "Tagestemperaturen mit 0,1 °C Genauigkeit",
+          "station_hysteresis_km": "Hysterese beim Stationswechsel (km)",
+          "max_station_distance_km": "Maximale Entfernung zur nächsten MOSMIX-Station (km)",
+          "last_known_location_max_age_min": "Maximales Alter der letzten gültigen Position (Minuten)"
+        },
+        "data_description": {
+          "max_station_distance_km": "Sicherheitsgrenze für sehr abgelegene Positionen oder auf See. MOSMIX-Stationen gibt es weltweit. 0 deaktiviert die Entfernungsgrenze.",
+          "last_known_location_max_age_min": "Bei einem GPS-/Entitätsausfall wird die letzte gültige Position höchstens so lange weiterverwendet. 0 deaktiviert den Ablauf. Standard: 60 Minuten."
+        }
+      }
+    },
+    "error": {
+      "fixed_location_required": "Für den Modus „Fester Standort“ muss ein Standort gesetzt werden"
+    }
+  },
+  "selector": {
+    "location_mode": {
+      "options": {
+        "home": "Aktueller Home-Assistant-Standort",
+        "entity": "Standort-Entität",
+        "fixed": "Fester Standort"
+      }
+    },
+    "data_type": {
+      "options": {
+        "mixed": "Messwerte wenn vorhanden, sonst Vorhersage",
+        "forecast": "Nur Vorhersage",
+        "report": "Messwerte / Stationsbericht"
+      }
+    },
+    "wind_direction_type": {
+      "options": {
+        "degrees": "Grad",
+        "cardinal": "Himmelsrichtung"
+      }
+    }
+  },
+  "entity": {
+    "weather": {
+      "weather": {
+        "name": "Wetter"
+      }
+    },
+    "sensor": {
+      "weather_condition": {
+        "name": "Wetterzustand"
+      },
+      "weather_report": {
+        "name": "Wetterbericht"
+      },
+      "temperature": {
+        "name": "Temperatur"
+      },
+      "apparent_temperature": {
+        "name": "Gefühlte Temperatur"
+      },
+      "dewpoint": {
+        "name": "Taupunkt"
+      },
+      "pressure": {
+        "name": "Druck"
+      },
+      "wind_speed": {
+        "name": "Windgeschwindigkeit"
+      },
+      "wind_direction": {
+        "name": "Windrichtung"
+      },
+      "wind_gusts": {
+        "name": "Windböen"
+      },
+      "precipitation": {
+        "name": "Niederschlag"
+      },
+      "precipitation_probability": {
+        "name": "Niederschlagswahrscheinlichkeit"
+      },
+      "precipitation_duration": {
+        "name": "Niederschlagsdauer"
+      },
+      "cloud_coverage": {
+        "name": "Bewölkungsgrad"
+      },
+      "visibility": {
+        "name": "Sichtweite"
+      },
+      "sun_duration": {
+        "name": "Sonnenscheindauer"
+      },
+      "sun_duration_today": {
+        "name": "Sonnenscheindauer heute"
+      },
+      "sun_irradiance": {
+        "name": "Sonneneinstrahlung"
+      },
+      "fog_probability": {
+        "name": "Nebelwahrscheinlichkeit"
+      },
+      "humidity": {
+        "name": "Relative Luftfeuchtigkeit"
+      },
+      "humidity_absolute": {
+        "name": "Absolute Luftfeuchtigkeit"
+      },
+      "uv_index": {
+        "name": "UV-Index"
+      },
+      "evaporation": {
+        "name": "Verdunstung in den nächsten 24 Stunden"
+      },
+      "airquality_no2": {
+        "name": "Luftqualität Stickstoffdioxid"
+      },
+      "airquality_ozone": {
+        "name": "Luftqualität Ozon"
+      },
+      "airquality_pm2_5": {
+        "name": "Luftqualität PM2.5"
+      },
+      "airquality_pm10": {
+        "name": "Luftqualität PM10"
+      },
+      "radar_precipitation_now": {
+        "name": "Radar Niederschlag aktuell"
+      },
+      "radar_next_precipitation": {
+        "name": "Radar nächster Niederschlag"
+      },
+      "forecast_values_time": {
+        "name": "Zeit Vorhersagewerte"
+      },
+      "measured_values_time": {
+        "name": "Zeit Messwerte"
+      },
+      "active_station": {
+        "name": "Aktive DWD-Station"
+      },
+      "station_distance": {
+        "name": "Entfernung zur DWD-Station"
+      },
+      "location_latitude": {
+        "name": "Standort Breitengrad"
+      },
+      "location_longitude": {
+        "name": "Standort Längengrad"
+      },
+      "location_status": {
+        "name": "Standortstatus"
+      },
+      "coverage_status": {
+        "name": "MOSMIX-Abdeckungsstatus"
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "domain": "dwd_mobile",
+  "name": "DWD Mobile",
+  "codeowners": [
+    "@svemmiii"
+  ],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/svemmiii/DWD-mobile",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/svemmiii/DWD-mobile/issues",
+  "loggers": [
+    "simple_dwd_weatherforecast"
+  ],
+  "requirements": [
+    "simple_dwd_weatherforecast==3.5.0",
+    "markdownify>=1.2",
+    "suntimes==1.1.2"
+  ],
+  "version": "0.1.0"
+}

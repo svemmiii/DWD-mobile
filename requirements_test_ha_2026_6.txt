@@ -1,0 +1,5 @@
+pytest==9.0.3
+pytest-homeassistant-custom-component==0.13.336
+simple_dwd_weatherforecast==3.5.0
+markdownify>=1.2
+suntimes==1.1.2
